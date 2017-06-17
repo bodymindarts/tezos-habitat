@@ -1,0 +1,21 @@
+#!/bin/bash
+
+extraction_dir=./tezos-src
+
+echo 'Pulling latest alphanet image'
+docker pull tezos/tezos:alphanet
+docker rm -f dummy-alpha
+echo 'Starting dummy-alpha'
+docker run --name dummy-alpha -d --entrypoint "" tezos/tezos:alphanet sh -c 'while true; do sleep 1; done'
+
+echo 'Copying code from container'
+rm -rf ${extraction_dir}
+mkdir -p ${extraction_dir}
+
+docker cp dummy-alpha:/home/tezos/ ${extraction_dir}
+docker rm -f dummy-alpha
+
+mv ${extraction_dir}/tezos/* ${extraction_dir}
+rm -rf ${extraction_dir}/tezos
+
+echo "Extracted code for alphanet version: $(cat ${extraction_dir}/scripts/alphanet_version)"

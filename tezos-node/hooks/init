@@ -1,0 +1,24 @@
+#!/bin/bash
+
+exec 2>&1
+
+if [[ ! -f /etc/services ]]; then
+  cp -v {{pkgPathFor "core/iana-etc"}}/etc/services /etc/services
+fi
+
+node='tezos-node'
+node_dir={{pkg.svc_data_path}}
+
+cp {{pkg.svc_config_path}}/config.json ${node_dir}
+
+if [ -f "$node_dir/identity.json" ]; then
+  if ! "$node" identity check \
+    --data-dir "$node_dir" 2> /dev/null; then
+    echo "Ignoring the current peer identity (not enough proof of work)."
+    rm "$node_dir/identity.json"
+  fi
+else
+  echo "Generating new peer identity"
+  "$node" identity generate {{cfg.node_id_pow}} \
+    --data-dir "$node_dir"
+fi

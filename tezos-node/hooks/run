@@ -1,0 +1,8 @@
+#!/bin/bash
+
+exec 2>&1
+
+cp {{pkg.svc_config_path}}/config.json {{pkg.svc_data_path}}
+
+export LWT_ASYNC_METHOD=none
+exec tezos-node run --data-dir "{{pkg.svc_data_path}}"

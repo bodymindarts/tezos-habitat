@@ -1,0 +1,12 @@
+{
+  "data-dir": "{{pkg.svc_data_path}}",
+  "net": {
+    "listen-addr": "[::]:{{cfg.net_port}}"
+  },
+  "rpc": {
+    "listen-addr": "127.0.0.1:{{cfg.rpc_port}}"
+  },
+  "log": {
+    "output": "{{pkg.svc_data_path}}/log"
+  }
+}

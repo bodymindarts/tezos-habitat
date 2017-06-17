@@ -1,0 +1,10 @@
+# Use this file to templatize your application's native configuration files.
+# See the docs at https://www.habitat.sh/docs/create-packages-configure/.
+# You can safely delete this file if you don't need it.
+#
+
+net_port = 9732
+rpc_port = 8732
+
+closed = true
+node_id_pow = 24
