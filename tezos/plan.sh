@@ -1,9 +1,12 @@
+# pkg_description="Some description."
+# pkg_upstream_url="http://example.com/project-name"
 pkg_name=tezos
-pkg_origin=misthosio
-pkg_description="A self-amending cryptographic ledger"
-pkg_upstream_url="github.com/tezos/tezos"
+pkg_origin=bodymindarts
+pkg_version="2017-06-06"
 # pkg_license=('Apache-2.0')
-pkg_dirname="tezos-src"
+pkg_source="nofile.tgz"
+pkg_shasum="TODO"
+pkg_dirname="tezos-${pkg_version}"
 pkg_deps=(
   core/gcc-libs
   core/glibc
@@ -18,10 +21,6 @@ pkg_deps=(
 pkg_build_deps=(core/coreutils core/diffutils misthosio/opam core/camlp4 core/perl)
 pkg_bin_dirs=(bin)
 
-pkg_version() {
-  cat "${PLAN_CONTEXT}/../tezos-src/scripts/alphanet_version"
-}
-
 do_download() {
   return 0
 }
@@ -30,18 +29,32 @@ do_verify() {
   return 0
 }
 
+do_unpack() {
+  return 0
+}
+
 do_begin() {
-  if [[ -f "${PLAN_CONTEXT}/../tezos-src/scripts/alphanet_version" ]]; then
-    update_pkg_version
+  version_file="${PLAN_CONTEXT}/../tezos-src/scripts/alphanet_version"
+  if [[ -f "${version_file}" ]]; then
+    if [[ "$(cat ${version_file})" != "${pkg_version}" ]]; then
+      build_line "It looks like the extracted src code does not match the expected version."
+      build_line "scripts/alphanet_version: $(cat ${version_file})"
+      build_line "pkg_version:              ${pkg_version}"
+      build_line "Perhaps pkg_version needs to be updated in the plan."
+      exit 1
+    fi
   else
-    build_line "It looks like the source code of tezos has not been extracted from the alphanet container. Please run bin/extract_alphanet_source and try again."
+    build_line "The tezos source code could not be found. Please extract it by running bin/extract_alphanet_source before trying to build this plan"
     exit 1
   fi
 }
 
 do_prepare() {
-  mkdir -p "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
-  cp -r "${PLAN_CONTEXT}/../tezos-src/*" "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  cp -r "${PLAN_CONTEXT}/../tezos-src/src" "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  cp -r "${PLAN_CONTEXT}/../tezos-src/Makefile" "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  cp -r "${PLAN_CONTEXT}/../tezos-src/scripts" "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+
+  cd "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
 
   opam init --no-setup --root=${HAB_CACHE_SRC_PATH}/opam/${pkg_name}
   eval `opam config env --root=${HAB_CACHE_SRC_PATH}/opam/${pkg_name}`
@@ -69,11 +82,13 @@ do_prepare() {
 }
 
 do_build() {
+  cd "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
   make build-deps
   make
 }
 
 do_install() {
+  cd "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
   cp ./tezos-{client,node,protocol-compiler} ${pkg_prefix}/bin
 }
 
