@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  node:
+    container_name: node
+    ports:
+    - 9733:9733
+    volumes:
+    - ./tezos-node:/conf
+    - data:/hab/svc/tezos-node/data
+    image: misthosio/tezos-node
+    privileged: true
+    command: "start misthosio/tezos-node --config-from /conf"
+    environment:
+      HAB_TEZOS_NODE: |
+        net_port=9733
+        rpc_listen_addr="0.0.0.0"
+
+  baker:
+    container_name: baker
+    image: misthosio/tezos-baker
+    command: "start misthosio/tezos-baker --peer node --bind node:tezos-node.default --config-from /conf"
+    volumes:
+    - ./tezos-baker:/conf
+    links:
+    - node
+
+volumes:
+  data: {}
