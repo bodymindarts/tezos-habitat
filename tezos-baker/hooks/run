@@ -1,0 +1,9 @@
+#!/bin/bash
+
+exec 2>&1
+
+cp {{pkg.svc_config_path}}/client.json {{pkg.svc_data_path}}/config
+
+exec tezos-client -base-dir {{pkg.svc_data_path}} \
+  launch daemon -mining -max-priority 64 \
+  | tee {{pkg.svc_data_path}}/baker.log
