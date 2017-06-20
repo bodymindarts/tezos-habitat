@@ -17,8 +17,9 @@ if [ -f "$node_dir/identity.json" ]; then
     echo "Ignoring the current peer identity (not enough proof of work)."
     rm "$node_dir/identity.json"
   fi
-else
+fi
+if [ ! -f "$node_dir/identity.json" ]; then
   echo "Generating new peer identity"
-  "$node" identity generate {{cfg.node_id_pow}} \
+  "$node" identity generate \
     --data-dir "$node_dir"
 fi
