@@ -7,6 +7,6 @@
     "listen-addr": "{{cfg.rpc_listen_addr}}:{{cfg.rpc_port}}"
   },
   "log": {
-    "output": "{{pkg.svc_data_path}}/log"
+    "output": "{{pkg.svc_data_path}}/node.log"
   }
 }
