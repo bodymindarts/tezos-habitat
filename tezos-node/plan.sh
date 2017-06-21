@@ -28,5 +28,5 @@ do_build() {
 }
 
 do_install() {
-  cp -r "${PLAN_CONTEXT}/bin/setup_client" "${pkg_prefix}/bin"
+  return 0
 }

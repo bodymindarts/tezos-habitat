@@ -1,3 +1,0 @@
-#!/bin/bash
-
-alias tc="tezos-client -base-dir /.tezos-client"
