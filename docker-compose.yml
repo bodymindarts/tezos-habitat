@@ -5,6 +5,7 @@ services:
     container_name: node
     ports:
     - 9733:9733
+    - 8733:8733
     volumes:
     - ./tezos-node:/conf
     - data:/hab/svc/tezos-node/data
@@ -14,6 +15,7 @@ services:
     environment:
       HAB_TEZOS_NODE: |
         net_port=9733
+        rpc_port=8733
         rpc_listen_addr="0.0.0.0"
 
   baker:
@@ -22,6 +24,10 @@ services:
     command: "start misthosio/tezos-baker --peer node --bind node:tezos-node.default --config-from /conf"
     volumes:
     - ./tezos-baker:/conf
+    environment:
+      HAB_TEZOS_BAKER: |
+        wallet_secret_key="${BAKER_SECRET_KEY}"
+        wallet_public_key="${BAKER_PUBLIC_KEY}"
     links:
     - node
 

@@ -11,9 +11,14 @@ cp {{pkg.svc_config_path}}/client.json {{pkg.svc_data_path}}/config
 alias tc="tezos-client -base-dir {{pkg.svc_data_path}}"
 
 tc bootstrapped
-tc forget all keys
 
-tc gen keys "baker_id"
+if [[ "{{cfg.wallet_secret_key}}" != "" && "{{cfg.wallet_public_key}}" != "" ]]; then
+  tc add public key "baker" "{{cfg.wallet_public_key}}"
+  tc add secret key "baker" "{{cfg.wallet_secret_key}}"
+else
+  tc gen keys "baker"
+fi
+
 # tc forget contract "my_account" >/dev/null 2>&1 || true
 # tc originate free account "my_account" for "my_identity"
 
