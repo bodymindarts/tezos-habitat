@@ -14,8 +14,8 @@ tc bootstrapped
 
 if [[ "{{cfg.wallet_secret_key}}" != "" && "{{cfg.wallet_public_key}}" != "" ]]; then
   tc forget all keys -force true
-  tc add public key "baker" "{{cfg.wallet_public_key}}"
-  tc add secret key "baker" "{{cfg.wallet_secret_key}}"
+  tc add public key "endorser" "{{cfg.wallet_public_key}}"
+  tc add secret key "endorser" "{{cfg.wallet_secret_key}}"
 else
-  tc gen keys "baker"
+  tc gen keys "endorser"
 fi

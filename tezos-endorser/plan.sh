@@ -1,6 +1,6 @@
 # pkg_description="Some description."
 # pkg_upstream_url="http://example.com/project-name"
-pkg_name=tezos-baker
+pkg_name=tezos-endorser
 pkg_origin=misthosio
 pkg_version="2017-06-06"
 # pkg_license=('Apache-2.0')

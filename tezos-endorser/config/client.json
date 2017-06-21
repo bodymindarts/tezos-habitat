@@ -1,0 +1,7 @@
+{
+  "base_dir": "{{pkg.svc_data_path}}",
+  "node_addr": "{{bind.node.first.sys.ip}}",
+  "node_port": {{bind.node.first.cfg.rpc_port}},
+  "tls": false,
+  "web_port": 8080
+}

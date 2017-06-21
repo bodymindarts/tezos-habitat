@@ -26,8 +26,21 @@ services:
     - ./tezos-baker:/conf
     environment:
       HAB_TEZOS_BAKER: |
-        wallet_secret_key="${BAKER_SECRET_KEY}"
-        wallet_public_key="${BAKER_PUBLIC_KEY}"
+        wallet_secret_key="${DELEGATE_SECRET_KEY}"
+        wallet_public_key="${DELEGATE_PUBLIC_KEY}"
+    links:
+    - node
+
+  endorser:
+    container_name: endorser
+    image: misthosio/tezos-endorser
+    command: "start misthosio/tezos-endorser --peer node --bind node:tezos-node.default --config-from /conf"
+    volumes:
+    - ./tezos-endorser:/conf
+    environment:
+      HAB_TEZOS_ENDORSER: |
+        wallet_secret_key="${DELEGATE_SECRET_KEY}"
+        wallet_public_key="${DELEGATE_PUBLIC_KEY}"
     links:
     - node
 
