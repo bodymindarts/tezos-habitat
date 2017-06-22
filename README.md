@@ -63,6 +63,8 @@ wallet_public_key="<your_public_key>"
 $ sudo HAB_TEZOS_BAKER=$(cat keys.toml) hab load misthosio/tezos-baker -bind node:tezos-node.default
 ```
 
+## Running everything with docker-compose
+
 Alternatively you can simply run the node, baker and endorser together using [the docker-compose file](./docker-compose.yml) from the repo root.
 
 ```
