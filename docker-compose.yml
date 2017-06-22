@@ -7,11 +7,10 @@ services:
     - 9733:9733
     - 8733:8733
     volumes:
-    - ./tezos-node:/conf
     - data:/hab/svc/tezos-node/data
     image: misthosio/tezos-node
     privileged: true
-    command: "start misthosio/tezos-node --config-from /conf"
+    command: "start misthosio/tezos-node"
     environment:
       HAB_TEZOS_NODE: |
         net_port=9733
@@ -21,9 +20,7 @@ services:
   baker:
     container_name: baker
     image: misthosio/tezos-baker
-    command: "start misthosio/tezos-baker --peer node --bind node:tezos-node.default --config-from /conf"
-    volumes:
-    - ./tezos-baker:/conf
+    command: "start misthosio/tezos-baker --peer node --bind node:tezos-node.default"
     environment:
       HAB_TEZOS_BAKER: |
         wallet_secret_key="${DELEGATE_SECRET_KEY}"
@@ -34,9 +31,7 @@ services:
   endorser:
     container_name: endorser
     image: misthosio/tezos-endorser
-    command: "start misthosio/tezos-endorser --peer node --bind node:tezos-node.default --config-from /conf"
-    volumes:
-    - ./tezos-endorser:/conf
+    command: "start misthosio/tezos-endorser --peer node --bind node:tezos-node.default"
     environment:
       HAB_TEZOS_ENDORSER: |
         wallet_secret_key="${DELEGATE_SECRET_KEY}"
