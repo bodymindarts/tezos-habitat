@@ -4,16 +4,16 @@ This repository contains [Habitat](https://www.habitat.sh/) packages of the [tez
 
 ## Installing
 
-The easiest way for you to install the tezos binaries on your Linux-based OS is via Habitat.
+The easiest way for you to install the tezos binaries on your Linux-based OS is via Habitat. (If you are on a mac you cannot use the packages directly but they are still usefull via docker exported versions.)
 
-To install Habitat either go to the [website](https://www.habitat.sh/docs/get-habitat/) or run:
+To install Habitat either download the cli [from the website](https://www.habitat.sh/docs/get-habitat/) or run:
 ```
 $ curl https://raw.githubusercontent.com/habitat-sh/habitat/master/components/hab/install.sh | sudo bash
 $ hab -V
 hab 0.24.1/20170522075711
 ```
 
-then use habitat to install the misthosio/tezos package and symlink it to your /bin directory:
+then use Habitat to install the misthosio/tezos package and symlink it to your /bin directory:
 ```
 $ sudo hab pkg install misthosio/tezos
 $ sudo hab pkg binlink misthosio/tezos
@@ -46,7 +46,7 @@ $ docker run misthosio/tezos-node
 
 ## Running the baker / endorser
 
-The tezos-{baker,endorser} packages will allow you to bake and endorse blocks respectively. They require a running tezos-node that they can bind to to function correctly. (Check out the [habitat docs](https://www.habitat.sh/docs/overview/) to find out more about [runtime bindings](https://www.habitat.sh/docs/run-packages-binding/))
+The tezos-{baker,endorser} packages will allow you to bake and endorse blocks respectively. They require a running tezos-node that they can bind to to function correctly. (Check out the [Habitat docs](https://www.habitat.sh/docs/overview/) to find out more about [runtime bindings](https://www.habitat.sh/docs/run-packages-binding/))
 
 If you are already running a tezos-node locally you can open a new terminal and run:
 ```
@@ -78,7 +78,7 @@ If you want to build the packages yourself you will first need to extract the la
 ```
 $ ./bin/extract_alphanet_source
 ```
-and then build the packages by entering the habitat studio:
+and then build the packages by entering the Habitat studio:
 
 ```
 $ hab studio enter
@@ -95,4 +95,9 @@ drwxr-xr-x  16 jcarter  staff       544 Jun 22 09:07 ..
 -rw-r--r--@  1 jcarter  staff      2890 Jun 21 08:22 misthosio-tezos-baker-2017-06-06-20170621062210-x86_64-linux.hart
 -rw-r--r--@  1 jcarter  staff      2874 Jun 21 08:22 misthosio-tezos-endorser-2017-06-06-20170621062212-x86_64-linux.hart
 -rw-r--r--@  1 jcarter  staff      3894 Jun 21 08:22 misthosio-tezos-node-2017-06-06-20170621062158-x86_64-linux.hart
+```
+
+you may have to initialize your hab cli first via:
+```
+$ hab cli setup
 ```
