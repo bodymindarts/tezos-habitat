@@ -6,7 +6,7 @@ This repository contains [Habitat](https://www.habitat.sh/) packages of the [tez
 
 The easiest way for you to install the tezos binaries on your Linux-based OS is via Habitat.
 
-To install Habitat either go to the website or run:
+To install Habitat either go to the [website](https://www.habitat.sh/docs/get-habitat/) or run:
 ```
 $ curl https://raw.githubusercontent.com/habitat-sh/habitat/master/components/hab/install.sh | sudo bash
 $ hab -V
@@ -84,5 +84,15 @@ and then build the packages by entering the habitat studio:
 $ hab studio enter
 [1][default:/src:0]# build tezos
 [2][default:/src:0]# build tezos-node
-[3][default:/src:0]# exit
+(...)
+[5][default:/src:0]# exit
+$ ls -al results
+total 29920
+drwxr-xr-x@  7 jcarter  staff       238 Jun 21 08:22 .
+drwxr-xr-x  16 jcarter  staff       544 Jun 22 09:07 ..
+-rw-r--r--@  1 jcarter  staff       397 Jun 21 08:22 last_build.env
+-rw-r--r--@  1 jcarter  staff  15299386 Jun 21 08:21 misthosio-tezos-2017-06-06-20170621061141-x86_64-linux.hart
+-rw-r--r--@  1 jcarter  staff      2890 Jun 21 08:22 misthosio-tezos-baker-2017-06-06-20170621062210-x86_64-linux.hart
+-rw-r--r--@  1 jcarter  staff      2874 Jun 21 08:22 misthosio-tezos-endorser-2017-06-06-20170621062212-x86_64-linux.hart
+-rw-r--r--@  1 jcarter  staff      3894 Jun 21 08:22 misthosio-tezos-node-2017-06-06-20170621062158-x86_64-linux.hart
 ```
