@@ -11,12 +11,12 @@ pkg_deps=(
   core/gcc-libs
   core/glibc
   core/gmp/6.1.0/20170513202112
+  core/leveldb
   core/libev
   core/libsodium
   core/openssl
+  core/snappy
   core/zlib
-  misthosio/leveldb
-  misthosio/snappy
 )
 pkg_build_deps=(core/coreutils core/diffutils misthosio/opam core/camlp4 core/perl)
 pkg_bin_dirs=(bin)
