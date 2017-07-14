@@ -6,3 +6,4 @@
 net_port = 9732
 rpc_port = 8732
 rpc_listen_addr = "127.0.0.1"
+output = "stdout"

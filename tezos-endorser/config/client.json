@@ -1,7 +1,12 @@
 {
   "base_dir": "{{pkg.svc_data_path}}",
+  {{ #if cfg.node_addr }}
+  "node_addr": "{{cfg.node_addr}}",
+  "node_port": {{cfg.node_port}},
+  {{else}}
   "node_addr": "{{bind.node.first.sys.ip}}",
   "node_port": {{bind.node.first.cfg.rpc_port}},
+  {{/if}}
   "tls": false,
   "web_port": 8080
 }

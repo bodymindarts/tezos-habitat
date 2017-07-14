@@ -4,3 +4,5 @@
 
 wallet_secret_key = ""
 wallet_public_key = ""
+node_addr = ""
+node_port = 8732
