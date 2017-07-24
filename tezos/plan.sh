@@ -2,7 +2,7 @@
 # pkg_upstream_url="http://example.com/project-name"
 pkg_name=tezos
 pkg_origin=misthosio
-pkg_version="2017-06-30"
+pkg_version="2017-07-22"
 # pkg_license=('Apache-2.0')
 pkg_source="nofile.tgz"
 pkg_shasum="TODO"
