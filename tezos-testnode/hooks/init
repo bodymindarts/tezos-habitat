@@ -1,0 +1,7 @@
+#!/bin/bash
+
+exec 2>&1
+
+if [[ ! -f /etc/services ]]; then
+  cp -v {{pkgPathFor "core/iana-etc"}}/etc/services /etc/services
+fi

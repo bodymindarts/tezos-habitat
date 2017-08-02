@@ -1,0 +1,12 @@
+#!/bin/bash
+
+exec 2>&1
+
+sleep 3
+
+tezos-client -addr 127.0.0.1:{{cfg.rpc_port}} \
+  -block genesis \
+  activate \
+  protocol ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK \
+  with fitness 1 \
+  and key edskRhxswacLW6jF6ULavDdzwqnKJVS4UcDTNiCyiH6H8ZNnn2pmNviL7pRNz9kRxxaWQFzEQEcZExGHKbwmuaAcoMegj5T99z

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+exec 2>&1
+
+cp {{pkg.svc_config_path}}/config.json {{pkg.svc_data_path}}
+cp {{pkg.svc_config_path}}/sandbox.json {{pkg.svc_data_path}}
+
+exec tezos-node run --data-dir "{{pkg.svc_data_path}}" --sandbox "{{pkg.svc_config_path}}/sandbox.json"
