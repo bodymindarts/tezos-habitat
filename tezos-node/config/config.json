@@ -1,7 +1,7 @@
 {
   "data-dir": "{{pkg.svc_data_path}}",
   "net": {
-    "listen-addr": "0.0.0.0:{{cfg.net_port}}"
+    "listen-addr": "[::]:{{cfg.net_port}}"
   },
   "rpc": {
     "listen-addr": "{{cfg.rpc_listen_addr}}:{{cfg.rpc_port}}"

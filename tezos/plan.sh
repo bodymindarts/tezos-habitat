@@ -2,7 +2,7 @@
 # pkg_upstream_url="http://example.com/project-name"
 pkg_name=tezos
 pkg_origin=misthosio
-pkg_version="2017-07-22"
+pkg_version="2017-08-01"
 # pkg_license=('Apache-2.0')
 pkg_source="nofile.tgz"
 pkg_shasum="TODO"
@@ -78,7 +78,6 @@ do_prepare() {
 
   sed -i'' 's/opam install tezos-deps/opam install --yes tezos-deps/' scripts/install_build_deps.sh
   sed -i'' 's/opam pin add typerex-build/opam pin --yes add typerex-build/' scripts/install_build_deps.sh
-  sed -i'' '/opam pin --yes add typerex-build/a opam pin --yes add ezjsonm 0.4.3' scripts/install_build_deps.sh
 }
 
 do_build() {

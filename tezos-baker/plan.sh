@@ -2,7 +2,7 @@
 # pkg_upstream_url="http://example.com/project-name"
 pkg_name=tezos-baker
 pkg_origin=misthosio
-pkg_version="2017-07-22"
+pkg_version="2017-08-01"
 # pkg_license=('Apache-2.0')
 pkg_deps=(misthosio/tezos core/iana-etc)
 pkg_bin_dirs=(bin)
